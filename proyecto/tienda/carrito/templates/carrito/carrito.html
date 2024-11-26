@@ -1,0 +1,36 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %} Mi Carrito {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🛒 Mi Carrito</h1>
+
+    <!-- Producto en el carrito -->
+    <div class="producto-item">
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+        <div class="producto-info">
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.descripcion }}</p>
+        </div>
+        <div class="producto-precio">
+            ${{ producto.precio }}
+        </div>
+        <div class="producto-cantidad">
+            <input type="number" value="{{ producto.cantidad }}" min="1">
+            <button class="btn">Actualizar</button>
+        </div>
+        <div class="acciones">
+            <button>Eliminar</button>
+        </div>
+    </div>
+
+    <!-- Total -->
+    <div class="total">Total: ${{ total }}</div>
+    
+    <a href="{% url 'productos' %}">Volver a productos</a>
+</div>
+
+{% endblock %}

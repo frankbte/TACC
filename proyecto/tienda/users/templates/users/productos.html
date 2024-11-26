@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %} Servicio {% endblock %}
+
+{% block content %}
+{% load humanize %}
+
+<h2 class="productos-titulo">Nuestros Productos</h2>
+
+<div class="productos-container">
+    {% for producto in productos %}
+    <div class="producto-card">
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen">
+        {% else %}
+        <img src="{% static 'images/placeholder.png' %}" alt="Producto" class="producto-imagen">
+        {% endif %}
+        <div class="producto-detalle">
+            <h5 class="producto-marca">{{ producto.marca | capfirst }}</h5>
+            <h2 class="producto-nombre">{{ producto.nombre | title }}</h2>
+            <p class="producto-descripcion">{{ producto.descripcion|truncatechars:100 }}</p>
+            <h3 class="producto-precio">{{ producto.precio | floatformat:2 }} MXN</h3>
+        </div>
+        <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
